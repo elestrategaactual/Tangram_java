@@ -13,15 +13,12 @@ public class Tangram extends PApplet {
     }
     boolean victoria = false;
     boolean drawMalla = true;
+    int caso;
     Figura[] figuras;
     Figura[] figurasNivel;
     Figura[] botones;
-    Figura[] imagenes;
-    int caso;
     public void settings() {
-        size(900, 680, P2D);
-        imagenes = new Figura[1];
-        imagenes[0]= new Imagen(color(0, 0, 255), (width/2)-450, 40, 0, 0.0015f*height, "Titulo");
+        size(900, 680);
         figuras = new Figura[7];
         figuras[0]=new Triangulo(color(0, 0, 255), 100, 100, 1, 0.0025f*height);
         figuras[1]=new Triangulo(color(255, 0, 0), 100, 100, 1, 0.0025f*height);
@@ -37,7 +34,25 @@ public class Tangram extends PApplet {
         botones[3]=new Boton(color(255, 215, 0), width-100, 80, 30, height/500, "Regresar");
     }
 
-    void drawMalla(float scale) {
+    public void draw() {
+        background(255);
+        if (drawMalla)
+            drawMalla(10);
+        switch (caso) {
+            case 0:
+                background(255, 250, 5);
+                caso=menu();
+                break;
+            case 1:
+                caso=juego();
+                break;
+            case 2:
+                caso=modo_creador();
+                break;
+        }
+    }
+
+   public void drawMalla(float scale) {
         push();
         strokeWeight(1);
         int i;
@@ -57,24 +72,6 @@ public class Tangram extends PApplet {
             drawMalla = !drawMalla;
     }
 
-    public void draw() {
-        background(255);
-        if (drawMalla)
-            drawMalla(10);
-        switch (caso) {
-            case 0:
-                background(255, 250, 5);
-                imagenes[0].display();
-                caso=menu();
-                break;
-            case 1:
-                caso=juego();
-                break;
-            case 2:
-                caso=modo_creador();
-                break;
-        }
-    }
     int menu() {
         for (int i = 0; i < 3; i++) {
             botones[i].display();
@@ -101,7 +98,6 @@ public class Tangram extends PApplet {
         for (int i = 0; i < 3; i++) {
             botones[i].move(0, y, 0, 1);
         }
-        imagenes[0].move(0, y, 0, 1);
         return 0;
     }
 
