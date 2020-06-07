@@ -2,24 +2,18 @@ import processing.core.PApplet;
 import processing.data.JSONArray;
 import processing.data.JSONObject;
 import processing.event.MouseEvent;
-
-public class MainClass extends PApplet {
+public class Tangram extends PApplet {
     public static PApplet processing;
-
     public static void main(String[] passedArgs) {
-        String[] appletArgs = new String[]{"MainClass"};
+        String[] appletArgs = new String[]{"Tangram"};
         PApplet.main(appletArgs);
     }
-
     public void setup() {
         processing = this;
     }
-
     Figura[] figuras;
     boolean victoria = false;
-    ;
     Figura[] figurasNivel;
-
     public void settings() {
         size(800, 800);
         figuras = new Figura[7];
@@ -31,7 +25,6 @@ public class MainClass extends PApplet {
         figuras[5] = new Cuadrado(color(255, 255, 0), 200, 100, 0, 0.0025f * height);
         figuras[6] = new Paralelogramo(color(100, 100, 255), 200, 100, 0, 0.0025f * height);
     }
-
     public void draw() {
         background(255);
         // menu();
@@ -39,7 +32,6 @@ public class MainClass extends PApplet {
         juego();
         //modo_creador();
         //}
-
         condicionDeVictoria();
     }
 
@@ -103,7 +95,6 @@ public class MainClass extends PApplet {
             }
         }
     }
-
     public void mouseDragged() {
         for (Figura figura : figuras) {
             if (figura.seleccion(get(mouseX, mouseY))) {
@@ -111,7 +102,6 @@ public class MainClass extends PApplet {
             }
         }
     }
-
     public void mouseWheel(MouseEvent event) {
         for (Figura figura : figuras) {
             if (figura.seleccion(get(mouseX, mouseY))) {
@@ -120,7 +110,6 @@ public class MainClass extends PApplet {
         }
 
     }
-
     public void condicionDeVictoria() {
         if (victoria == false) {
             int negro = color(0, 0, 0);
@@ -131,7 +120,6 @@ public class MainClass extends PApplet {
                 if (negro == ddd && (victoria == false)) {
                     contador++;
                 }
-
             }
             if (contador < 4000) {//&& pantallaInicial
                 print("Ganaste");
@@ -148,7 +136,6 @@ public class MainClass extends PApplet {
 
         figurasNivel = new Figura[nivelData.size()];
         for (int i = 0; i < nivelData.size(); i++) {
-
             JSONObject nivel = nivelData.getJSONObject(i);
             // Get a position object
             float x = nivel.getFloat("x");
